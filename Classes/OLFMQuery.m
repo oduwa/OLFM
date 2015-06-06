@@ -160,6 +160,19 @@ static OLFMQuery *globalInstance = nil;
     return result;
 }
 
+- (void) searchForTrackWithName: (NSString *)nameOfTrack withArtistName: (NSString *)nameOfArtist completion:(void (^)(NSArray *results))completion
+{
+    dispatch_queue_t backgroundQueue = dispatch_queue_create("Search Bakground Queue",NULL);
+    
+    dispatch_async(backgroundQueue, ^{
+        NSArray *results = [self searchForTrackWithName:nameOfTrack withArtistName:nameOfArtist];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(results);
+        });
+    });
+}
+
 
 - (NSArray *) searchForTrackWithName: (NSString *)nameOfTrack
 {
@@ -218,6 +231,19 @@ static OLFMQuery *globalInstance = nil;
     }
     
     return result;
+}
+
+- (void) searchForTrackWithName: (NSString *)nameOfTrack completion:(void (^)(NSArray *results))completion
+{
+    dispatch_queue_t backgroundQueue = dispatch_queue_create("Search Bakground Queue",NULL);
+    
+    dispatch_async(backgroundQueue, ^{
+        NSArray *results = [self searchForTrackWithName:nameOfTrack];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(results);
+        });
+    });
 }
 
 

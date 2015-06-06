@@ -36,6 +36,24 @@
 
 
 
+
+/**
+ * Returns a list of OLFMTrack objects matching the track name and artist specified.
+ *
+ * @param nameOfTrack The name of the track to find.
+ * @param nameOfArtist The name of the artist of the track to find.
+ * @param completion Block of code containing the search results as a parameter to be
+ * performed once the seardh completes.
+ *
+ * @return An array of OLFMTrack objects with the
+ * following fields set - "name", "artistName", "trackURL", "mbid", "smallTrackCoverArtURL",
+ * "mediumTrackCoverArtURL", "largeTrackCoverArtURL" and "extralargeTrackCoverArtURL".
+ * Returns nil if the calling track has no name or artistName
+ */
+- (void) searchForTrackWithName: (NSString *)nameOfTrack withArtistName: (NSString *)nameOfArtist completion:(void (^)(NSArray *results))completion;
+
+
+
 /**
  * Returns a list of OLFMTrack objects matching the track name specified.
  *
@@ -48,6 +66,21 @@
  */
 - (NSArray *) searchForTrackWithName: (NSString *)nameOfTrack;
 
+
+
+/**
+ * Returns a list of OLFMTrack objects matching the track name specified.
+ *
+ * @param nameOfTrack The name of the track to find
+ * @param completion Block of code containing the search results as a parameter to be
+ * performed once the seardh completes.
+ *
+ * @return An array of OLFMTrack objects with the
+ * following fields set - "name", "artistName", "trackURL", "mbid", "smallTrackCoverArtURL",
+ * "mediumTrackCoverArtURL", "largeTrackCoverArtURL" and "extralargeTrackCoverArtURL".
+ * Returns nil if the calling track has no name or artistName
+ */
+- (void) searchForTrackWithName: (NSString *)nameOfTrack completion:(void (^)(NSArray *results))completion;
 
 
 /**
